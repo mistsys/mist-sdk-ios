@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "MistSDK"
-    s.homepage     = "http://www.mist.com"
+    s.homepage     = "https://github.com/mistsys/mist-sdk-ios"
     s.license      = { :type => 'Copyright', :text => 'Copyright 2017 by Mist Systems Inc. All rights reserved.' }
     s.version      = "0.0.976"
     s.summary      = "Mist SDK"
