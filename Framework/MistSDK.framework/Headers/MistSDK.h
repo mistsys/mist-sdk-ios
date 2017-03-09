@@ -35,3 +35,5 @@ FOUNDATION_EXPORT const unsigned char MistSDKVersionString[];
 #import <MistSDK/UIImage+Mist.h>
 #import <MistSDK/UIImageView+Mist.h>
 
+#import <MistSDK/MSTCentralManager+Analytics.h>
+

@@ -20,6 +20,8 @@
 #import "MSTBeacon.h"
 #import "MSTEnum.h"
 
+#define __deprecated    __attribute__((deprecated))
+
 @protocol MSTCentralManagerDelegate;
 @protocol MSTProximityDelegate;
 
@@ -60,31 +62,15 @@
 
 @property (nonatomic) BOOL shouldEnableDebugInfo;
 
-// Analyze in/out time for Bob
-@property (nonatomic, strong) NSMutableDictionary *requestHandlerCounterDict;
-@property (nonatomic, strong) NSMutableArray *requestInTimeIntsDiffArr;
-@property (nonatomic, strong) NSMutableDictionary *requestInTimeIntsHistoric;
-@property (nonatomic) NSDate *previousOutDate;
-@property (nonatomic) unsigned int minCounter;
-@property (nonatomic) NSDate *previousInDate;
-@property (nonatomic, strong) NSMutableDictionary *histogramInTime;
-@property (nonatomic, strong) NSMutableDictionary *clientInformation;
-@property (nonatomic) bool shouldCompressData;
-
 /**
  *  Only send device motion if the user opt in, otherwise send NO for isDeviceMoving
  */
 @property (nonatomic, assign) bool shouldSendDeviceIsMoving;
 
-@property (nonatomic, strong) NSString *zoneName;
-@property (nonatomic, strong) NSString *zoneType;
-@property (nonatomic, strong) NSDate *zoneDate;
-
 /**
  *  Set this property to true to send data via UDP, false will use TCP.
  */
 @property (nonatomic) bool shouldUseUDP;
-
 
 @property (nonatomic) bool shouldUseDeadReckoning;
 @property (nonatomic) BOOL shouldSendLogs; //Flag for checking if the logs should be sent
@@ -105,7 +91,6 @@
  * Turn on or off compass
  * @param compassStatus on / off
  */
-
 - (void) setCompassStatus: (BOOL) compassStatus;
 
 //App Information
@@ -224,16 +209,27 @@
 -(void)setRangingInBackground:(NSArray *)regions;
 
 /**
- * Setting that enables or disables wake up of the app using iBeacon regions
+ * Setting that enables or disables SDK usage when app is woken using iBeacon regions
  *
- 
  */
 
 #pragma mark - Wake up app
 - (void) wakeUpAppSetting: (BOOL) shouldWakeUpApp;
 
+/**
+ * Setting that enables or disables SDK to work in background mode
+ *
+ */
+
 #pragma mark - Background app settings
 - (void) backgroundAppSetting: (BOOL) shouldWorkInBackground;
+
+/**
+ * Setting that enables or disables SDK remote logging and also sets the logging level
+ *
+ */
+
+- (void) setLogLevel: (MSTRemoteLoggingLogLevel) mistRemoteLoggingLogLevel;
 
 #pragma mark -
 
@@ -250,74 +246,18 @@
 
 -(void)alert:(NSDictionary *)msgDict;
 
-#pragma mark -
-//Test Only
+#pragma mark - App modified locations
+- (void) sendAppModifiedLocation: (CLLocationCoordinate2D) location;
+- (void) sendAppModifiedLocationX:(double) x y:(double) y;
 
-#pragma mark - TEST only
-@property (nonatomic) long timeElapsed;
-@property (nonatomic) BOOL isAccuracyTestingOn;
-@property (nonatomic) BOOL isStopAndGoDataCollection;
-@property (nonatomic) BOOL isWalkTest;
-
-- (NSString *) getDeviceId;
-- (NSDictionary *) getDeviceInformation;
-- (CLLocationCoordinate2D) getCurrentOSLocation;
-- (NSString *) getResponseString;
-
-//Test only APIs
-- (void) setTopicName:(NSString *)topic;
-- (void) setHostURL:(NSString *)hostUri;
-
-/**
- *  Set the environment type to connect to the correct Mist environment.
- *
- *  @param envType - The values for this param is D,S,P.
- */
-- (void) setEnviroment:(NSString *)envType;
-
+#pragma mark - Convert x,y to lat, long
 - (CLLocationCoordinate2D) getLatitudeLongitudeUsingMapOriginForX: (double) x AndY: (double) y;
 
 #pragma mark - App debugging
 - (void) sendAppLogs: (NSDictionary *) appLog;
 
-#pragma mark - App modified locations
-- (void) sendAppModifiedLocation: (CLLocationCoordinate2D) location;
-- (void) sendAppModifiedLocationX:(double) x y:(double) y;
-
 #pragma mark - Lab for Testing
 - (void) startTestsForDurationInMins: (long) mins;
-
-#pragma mark - Data collection
-
-- (void) setMarkerInformationWithDate:(NSString *)time MarkerX:(int)x AndY:(int)y;
-- (void) setWalkMarkerInformationWithDate:(NSString *)time MarkerX:(int)x AndY:(int)y EndX: (int)endX AndEndY: (int)endY AndComments: (NSString *) walkComment;
-- (void) startDataCollection;
-- (void) stopDataCollection;
-- (int) getCollectionCounter;
-- (void) spottedVbeacon;
-- (void) incrementStaticX;
-- (void) incrementStaticY;
-- (void) decrementStaticX;
-- (void) decrementStaticY;
-- (NSString *) currentStaticLocation;
-
-- (void) setPFWayFindingParam1: (int) way1 param2: (int) way2;
-- (void) setSpeed: (float) speed;
-- (void) setSdsParam1: (int) speedSD param2: (int) speedSDEst param3: (int) angle1SD param4: (int) angle2SD param4: (int) leSD;
-
-/**
- *  Get accumulative transmitted data size;
- *
- *  @return size in bytes
- */
--(NSUInteger)getAccumulativeTXSize;
-
-/**
- *  Get accumulative received data size;
- *
- *  @return size in bytes
- */
--(NSUInteger)getAccumulativeRXSize;
 
 @end
 
@@ -508,7 +448,7 @@
 
 -(void)mistManager:(MSTCentralManager *)manager didUpdateProximityToMinor: (int) minor;
 
--(void)mistManager:(MSTCentralManager *)manager :(NSString *)message;
+-(void)mistManager:(MSTCentralManager *)manager :(NSString *)message __deprecated;
 
 #pragma mark data in/out for Bob
 

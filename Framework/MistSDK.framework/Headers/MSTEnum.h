@@ -163,4 +163,27 @@ typedef NS_ENUM(NSUInteger, MSTCentralManagerSettingStatus) {
     MSTCentralManagerSettingStatusOff
 };
 
+typedef NS_ENUM(NSUInteger, MSTRemoteLoggingLogLevel) {
+    /**
+     * Verbose logging. Everything will be logged
+     */
+    VERBOSE,
+    /**
+     * Debug logging. Debug information, warnings, errors will be logged
+     */
+    DEBUGGING,
+    /**
+     * Warn logging. Warnings and Errors will be logged. This is the default
+     */
+    WARNING,
+    /**
+     * Error logging. Only Errors will be logged
+     */
+    ERROR,
+    /**
+     * Logging is off. Not recommended
+     */
+    OFF
+};
+
 @end
