@@ -1,5 +1,11 @@
 ##MistSDK
+
+### v0.0.1041
+
+- Fixed bitcode and minor improvements
+
+### v0.0.950
+
 - Improved reconnection
 - Fixed various crashes
 
-dee4c7e-f6d952c
