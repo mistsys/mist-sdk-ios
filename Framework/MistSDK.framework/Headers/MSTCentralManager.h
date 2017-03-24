@@ -210,7 +210,6 @@
 
 /**
  * Setting that enables or disables SDK usage when app is woken using iBeacon regions
- *
  */
 
 #pragma mark - Wake up app
@@ -223,6 +222,10 @@
 
 #pragma mark - Background app settings
 - (void) backgroundAppSetting: (BOOL) shouldWorkInBackground;
+
+#pragma mark - Wake up / Background app times
+- (void) setSentTimeInBackgroundInMins: (double) sendTimeInBackgroundInMins
+            restTimeInBackgroundInMins: (double) restTimeInBackgroundInMins;
 
 /**
  * Setting that enables or disables SDK remote logging and also sets the logging level
