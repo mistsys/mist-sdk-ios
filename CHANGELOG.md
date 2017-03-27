@@ -1,5 +1,9 @@
 ##MistSDK
 
+### v0.0.1088
+
+- Fixed beacons limit bug
+
 ### v0.0.1080
 
 - Fixed beacons size limit
