@@ -458,6 +458,7 @@
 -(void)mistManager:(MSTCentralManager *)manager requestOutTimeInt:(NSTimeInterval)interval;
 -(void)mistManager:(MSTCentralManager *)manager requestInTimeInts:(NSArray *)timeInts;
 -(void)mistManager:(MSTCentralManager *)manager requestInTimeIntsHistoric:(NSDictionary *)timeIntsHistoric;
+-(void)mistManager:(MSTCentralManager *)manager overallOutstandingRequestsCount:(long) unansweredRequestsCount;
 
 #pragma mark 
 - (void) mistManager:(MSTCentralManager *)manager alert: (NSString *) message;

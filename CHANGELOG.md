@@ -1,5 +1,9 @@
 ##MistSDK
 
+### v0.0.1098
+
+- Fixing Reachability conflict.
+
 ### v0.0.1088
 
 - Fixed beacons limit bug
