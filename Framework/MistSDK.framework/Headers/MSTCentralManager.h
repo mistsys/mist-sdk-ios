@@ -17,6 +17,7 @@
 #import "MSTAsset.h"
 #import "MSTClient.h"
 #import "MSTZone.h"
+#import "MSTBeaconRegion.h"
 #import "MSTBeacon.h"
 #import "MSTEnum.h"
 
@@ -227,6 +228,14 @@
 - (void) setSentTimeInBackgroundInMins: (double) sendTimeInBackgroundInMins
             restTimeInBackgroundInMins: (double) restTimeInBackgroundInMins;
 
+#pragma mark - RANGING METHODS
+//Starts the delivery of notifications for beacons in the specified region
+- (void) startRangingBeaconsInRegion: (MSTBeaconRegion *) beaconRegion;
+
+//Stops the delivery of notifications for the specified beacon region
+- (void) stopRangingBeaconsInRegion: (MSTBeaconRegion *) beaconRegion;
+
+
 /**
  * Setting that enables or disables SDK remote logging and also sets the logging level
  *
@@ -262,6 +271,14 @@
 #pragma mark - Lab for Testing
 - (void) startTestsForDurationInMins: (long) mins;
 
+#pragma mark - Send Keep Alives
+- (void) setIfShouldSendKeepAlive: (BOOL) shouldSendKeepAlive;
+- (BOOL) getIfShouldSendKeepAlive;
+
+#pragma mark - Send Alerts
+- (void) setIfShouldSendAlerts: (BOOL) shouldSendAlerts;
+- (BOOL) getIfShouldSendAlerts;
+
 @end
 
 @protocol MSTCentralManagerDelegate <NSObject>
@@ -290,6 +307,15 @@
 
 #pragma mark - Raw estimate
 - (void) mistManager:(MSTCentralManager *)manager didUpdateSecondEstimate: (MSTPoint *) estimate inMaps: (NSArray *) maps at: (NSDate *) dateUpdated;
+
+#pragma mark - Virtual Beacon callbacks
+/**
+ * Called when beacons have been ranged in the beacon region
+ * @param manager       Returns the caller
+ * @param beacons       Returns the list of beacons ranged
+ * @param region        Returns the beacon region in which maps were ranged
+ */
+- (void) manager: (MSTCentralManager *) manager didRangeBeacons:(NSArray<MSTBeacon *> *)beacons inRegion:(MSTBeaconRegion *)region;
 
 #pragma mark - Location Callbacks
 
@@ -395,7 +421,6 @@
 
 -(void)manager:(MSTCentralManager *)manager didUpdateLocations:(NSArray *)locations;
 -(void)manager:(MSTCentralManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region;
--(void)manager:(MSTCentralManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region;
 
 #pragma mark -
 
@@ -459,6 +484,7 @@
 -(void)mistManager:(MSTCentralManager *)manager requestInTimeInts:(NSArray *)timeInts;
 -(void)mistManager:(MSTCentralManager *)manager requestInTimeIntsHistoric:(NSDictionary *)timeIntsHistoric;
 -(void)mistManager:(MSTCentralManager *)manager overallOutstandingRequestsCount:(long) unansweredRequestsCount;
+-(void)mistManager:(MSTCentralManager *)manager timedOutRequestsCount: (long) timedOutRequestCount;
 
 #pragma mark 
 - (void) mistManager:(MSTCentralManager *)manager alert: (NSString *) message;
