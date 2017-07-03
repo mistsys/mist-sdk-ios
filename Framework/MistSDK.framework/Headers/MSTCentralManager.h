@@ -76,6 +76,9 @@
 @property (nonatomic) bool shouldUseDeadReckoning;
 @property (nonatomic) BOOL shouldSendLogs; //Flag for checking if the logs should be sent
 
+//Millibars off / on
+@property (nonatomic) BOOL shouldSendMillibars;
+
 //Initialization
 
 /**
@@ -278,6 +281,11 @@
 #pragma mark - Send Alerts
 - (void) setIfShouldSendAlerts: (BOOL) shouldSendAlerts;
 - (BOOL) getIfShouldSendAlerts;
+
+#pragma mark - Compass / Dead reckoning settings
+- (void) setCompassOffset: (int) compassOffset;
+- (void) setUseOffset: (bool) useOffset;
+- (void) setdDead: (bool) dDead;
 
 @end
 
@@ -485,6 +493,9 @@
 -(void)mistManager:(MSTCentralManager *)manager requestInTimeIntsHistoric:(NSDictionary *)timeIntsHistoric;
 -(void)mistManager:(MSTCentralManager *)manager overallOutstandingRequestsCount:(long) unansweredRequestsCount;
 -(void)mistManager:(MSTCentralManager *)manager timedOutRequestsCount: (long) timedOutRequestCount;
+
+#pragma mark location rx / tx 
+- (void) mistManager: (MSTCentralManager *)manager didUpdateTotalRequests:(long)totalRequests andTotalResponses: (long)totalResponses atDate: (NSDate *) date;
 
 #pragma mark 
 - (void) mistManager:(MSTCentralManager *)manager alert: (NSString *) message;

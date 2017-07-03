@@ -46,6 +46,16 @@ typedef NS_ENUM(NSInteger, SourceType) {
      * SourceTypeMistLastKnown
      */
     SourceTypeMistLastKnown,
+    
+    /**
+     * SourceTypeMistLaggy
+     */
+    SourceTypeMISTLaggy,
+    
+    /**
+     * SourceTypeMistUnknownLag
+     */
+    SourceTypeMISTUnknownLag,
 };
 
 /**
