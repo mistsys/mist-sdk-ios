@@ -36,6 +36,7 @@
 #pragma mark - Data collection
 
 - (void) setMarkerInformationWithDate:(NSString *)time MarkerX:(int)x AndY:(int)y;
+- (void) setMarkerInformationWithDate:(NSString *)time MarkerX:(int)x AndY:(int)y AndRecordingId:(NSString *)recordingId;
 - (void) setWalkMarkerInformationWithDate:(NSString *)time MarkerX:(int)x AndY:(int)y EndX: (int)endX AndEndY: (int)endY AndComments: (NSString *) walkComment;
 - (void) startDataCollection;
 - (void) stopDataCollection;

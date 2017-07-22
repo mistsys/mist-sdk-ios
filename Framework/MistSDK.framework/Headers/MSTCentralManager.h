@@ -204,13 +204,19 @@
 
 -(void)saveClientInformation:(NSMutableDictionary *)clientInformation;
 
+#pragma mark --  RF recording
+
+-(void)startRFRecording:(NSString *)siteId withFloorName:(NSString *)floorName;
+
+-(void)stopRFRecording:(NSString *)siteId withRequestBody:(NSDictionary *)requestBody andRecordingId:(NSString *)recodringId;
+
 //#pragma mark - Error logging
 //- (void) reportLogMessage: (NSString *) errorMessage;
 
 #pragma mark - Background
 
--(void)setMonitoringInBackground:(NSArray *)regions;
--(void)setRangingInBackground:(NSArray *)regions;
+-(void)setMonitoringInBackground:(NSArray *)regions __deprecated;
+-(void)setRangingInBackground:(NSArray *)regions __deprecated;
 
 /**
  * Setting that enables or disables SDK usage when app is woken using iBeacon regions
@@ -496,6 +502,11 @@
 
 #pragma mark location rx / tx 
 - (void) mistManager: (MSTCentralManager *)manager didUpdateTotalRequests:(long)totalRequests andTotalResponses: (long)totalResponses atDate: (NSDate *) date;
+
+#pragma mark location RF Recording
+- (void) mistManager: (MSTCentralManager *)manager onStartRFRecordingResponse:(NSString *)recordingId withIsSuccess:(BOOL)isSuccess andMessage:(NSDictionary *) message;
+
+- (void) mistManager: (MSTCentralManager *)manager onStopRFRecordingResponse:(BOOL)isSuccess withMessage:(NSDictionary *) message;
 
 #pragma mark 
 - (void) mistManager:(MSTCentralManager *)manager alert: (NSString *) message;
