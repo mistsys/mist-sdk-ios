@@ -31,7 +31,7 @@
 
 @property (nonatomic, readonly) NSDictionary *wayfindingPath;
 @property (nonatomic, readonly) NSDictionary *wayfinding;
-@property (nonatomic, readonly) NSDictionary *sitesurveyPath;
+@property (nonatomic, readonly) NSArray *sitesurveyPath;
 @property (nonatomic, readonly) double orientation;
 
 -(instancetype)init;

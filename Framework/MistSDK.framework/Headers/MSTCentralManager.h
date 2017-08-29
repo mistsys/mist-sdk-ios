@@ -206,7 +206,7 @@
 
 #pragma mark --  RF recording
 
--(void)startRFRecording:(NSString *)siteId withFloorName:(NSString *)floorName;
+-(void)startRFRecording:(NSString *)siteId withFloorName:(NSString *)floorName withSurveyId:(NSString *)surveyId withSurveyName:(NSString *)surveyName;
 
 -(void)stopRFRecording:(NSString *)siteId withRequestBody:(NSDictionary *)requestBody andRecordingId:(NSString *)recodringId;
 
@@ -365,6 +365,9 @@
 -(void)mistManager: (MSTCentralManager *)manager didUpdatePle:(NSInteger)ple andIntercept:(NSInteger)intercept inMaps:(NSArray *)maps at:(NSDate *)dateUpdated;
 
 - (void) mistManager:(MSTCentralManager *)manager didUpdateAngle: (double) angleOrientation inMaps:(NSArray *)maps at:(NSDate *)dateUpdated;
+
+//Pressure callback
+- (void) mistManager:(MSTCentralManager *)manager didUpdatePressure: (double) pressure at: (NSDate *)dateUpdated;
 
 //Geolocation Callback
 

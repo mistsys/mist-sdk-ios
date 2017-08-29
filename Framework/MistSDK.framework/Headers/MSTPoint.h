@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, MSTPointType) {
 @property (nonatomic) bool hasMotion;
 @property (nonatomic) MSTPointType type;
 @property (nonatomic) double latency;
+@property (nonatomic) bool headingFlag;
+@property (nonatomic) double heading;
 
 -(id)initWithX:(double)x andY:(double)y;
 -(id)initWithCGPoint:(CGPoint)point;
