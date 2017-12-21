@@ -21,6 +21,8 @@
 #import "MSTBeacon.h"
 #import "MSTEnum.h"
 
+#import "MSTCentralManagerMapDataSource.h"
+
 #define __deprecated    __attribute__((deprecated))
 
 @protocol MSTCentralManagerDelegate;
@@ -48,6 +50,7 @@
 
 @property (nonatomic, weak) id<MSTCentralManagerDelegate> delegate;
 @property (nonatomic, weak) id<MSTProximityDelegate> proximityDelegate;
+@property (nonatomic, weak) id<MSTCentralManagerMapDataSource> mapDataSource;
 //Options
 @property (nonatomic) BOOL isSmoothingEnabled; //Private?
 
@@ -232,11 +235,12 @@
 
 #pragma mark - Background app settings
 - (void) backgroundAppSetting: (BOOL) shouldWorkInBackground;
-
+- (void) setAppState: (UIApplicationState) appState;
++ (UIApplicationState) getAppState;
 #pragma mark - Wake up / Background app times
 - (void) setSentTimeInBackgroundInMins: (double) sendTimeInBackgroundInMins
             restTimeInBackgroundInMins: (double) restTimeInBackgroundInMins;
-
+- (void) sendWithoutRest;
 #pragma mark - RANGING METHODS
 //Starts the delivery of notifications for beacons in the specified region
 - (void) startRangingBeaconsInRegion: (MSTBeaconRegion *) beaconRegion;

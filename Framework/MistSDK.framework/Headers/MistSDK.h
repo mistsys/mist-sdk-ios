@@ -30,6 +30,7 @@ FOUNDATION_EXPORT const unsigned char MistSDKVersionString[];
 #import <MistSDK/MistIDGenerator.h>
 #import <MistSDK/MSTRestAPI.h>
 #import <MistSDK/MSTBeaconRegion.h>
+#import <MistSDK/MSTCentralManagerMapDataSource.h>
 
 #import <MistSDK/MSTDeviceClient.h>
 #import <MistSDK/UIColor+Mist.h>
