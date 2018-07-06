@@ -174,6 +174,12 @@
  */
 - (NSString *) getMapName;
 
+/*!
+ * Get all the maps on the site
+ * @return maps a dictionary of maps keyed by mapId
+ */
+- (NSDictionary *)getMaps;
+
 //Settings
 
 /**
@@ -404,13 +410,9 @@
 
 -(void) mistManager: (MSTCentralManager *) manager didRangeBeacons:(NSArray *)beacons inRegion: (CLRegion *) region  at: (NSDate *) dateUpdated;
 
-// Beacon list callbacks
-
--(void) mistManager: (MSTCentralManager *) manager didUpdateBeaconList:(NSArray *)beaconUuids  at: (NSDate *) dateUpdated;
-
 #pragma mark - virtual beacons
 
--(void)mistManager:(MSTCentralManager *)manager didReceivedVirtualBeacons:(NSDictionary *)virtualBeacons;
+-(void)mistManager:(MSTCentralManager *)manager didReceivedVirtualBeacons:(NSArray *)virtualBeacons;
 
 #pragma mark - client information
 
@@ -474,6 +476,14 @@
  *  @param dateUpdated Returns the date updated.
  */
 - (void) mistManager: (MSTCentralManager *) manager didUpdateMap: (MSTMap *) map at: (NSDate *) dateUpdated;
+
+/**
+ * Provides the maps dictionary key by mapId
+ *  @param manager     Returns the caller
+ *  @param maps        Returns the the maps for all sites.
+ *  @param dateUpdated Returns the date updated.
+ */
+- (void) mistManager: (MSTCentralManager *) manager didReceivedAllMaps: (NSDictionary *) maps at: (NSDate *) dateUpdated;
 
 - (void) mistManager:(MSTCentralManager *)manager didUpdateLocationDate: (NSString *) locationUpdateDate;
 
