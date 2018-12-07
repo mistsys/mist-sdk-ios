@@ -11,7 +11,7 @@ DESC
     s.social_media_url      = 'https://twitter.com/mistsystems'
     s.platform              = :ios, "8.0"
     s.ios.deployment_target = "8.0"
-    s.source                = { :git => "https://github.com/mistsys/mist-sdk-ios.git", :tag => '1.4.0' }
+    s.source                = { :git => "https://github.com/mistsys/mist-sdk-ios.git", :tag => '1.4.1' }
     s.ios.vendored_frameworks = 'Framework/MistSDK.framework'
     s.frameworks            = "Foundation", "Security", "CFNetwork", "JavaScriptCore", "CoreLocation", "CoreBluetooth", "UIKit", "MapKit", "SystemConfiguration"
     s.libraries             = "icucore", "z"
