@@ -66,6 +66,8 @@
 
 @property (nonatomic) BOOL shouldEnableDebugInfo;
 
+@property (nonatomic) BOOL shouldFetchApInfo;
+
 /**
  *  Only send device motion if the user opt in, otherwise send NO for isDeviceMoving
  */
