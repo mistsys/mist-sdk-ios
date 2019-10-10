@@ -24,4 +24,10 @@ Methods:
  */
 +(NSUUID *)getMistUUID;
 
+/*!
+ *
+ * Clears the Mist UUID
+ */
++(void)clearMistUUID;
+
 @end

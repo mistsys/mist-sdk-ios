@@ -42,7 +42,7 @@
 - (void) startDataCollection;
 - (void) stopDataCollection;
 - (int) getCollectionCounter;
-- (void) spottedVbeacon;
+//- (void) spottedVbeacon;
 - (void) incrementStaticX;
 - (void) incrementStaticY;
 - (void) decrementStaticX;

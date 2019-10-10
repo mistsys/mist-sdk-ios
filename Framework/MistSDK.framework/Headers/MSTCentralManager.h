@@ -23,8 +23,6 @@
 
 #import "MSTCentralManagerMapDataSource.h"
 
-#define __deprecated    __attribute__((deprecated))
-
 @protocol MSTCentralManagerDelegate;
 @protocol MSTProximityDelegate;
 
@@ -78,11 +76,15 @@
  */
 @property (nonatomic) bool shouldUseUDP;
 
-@property (nonatomic) bool shouldUseDeadReckoning;
 @property (nonatomic) BOOL shouldSendLogs; //Flag for checking if the logs should be sent
 
 //Millibars off / on
+
 @property (nonatomic) BOOL shouldSendMillibars;
+
+// Ranging Virtual Beacon
+
+@property (nonatomic) BOOL shouldRangeVirtualBeacon;
 
 //Initialization
 
@@ -117,18 +119,6 @@
  *  Stop the location updates
  */
 - (void) stopLocationUpdates;
-
-/**
- * Start Asset Transmission
- */
-
-- (void) startAssetTransmission;
-
-/**
- * Stop Asset Transmission
- */
-
-- (void) stopAssetTransmission;
 
 //Location Response
 
@@ -207,12 +197,6 @@
 
 - (void) requestAuthorization: (AuthorizationType) authorizationType;
 
-/**
- * Send the SDK logs to Mist for debugging
- */
-
-- (void) sendLogReport: (NSString *) comments;
-
 -(void)saveClientInformation:(NSMutableDictionary *)clientInformation;
 
 #pragma mark --  RF recording
@@ -221,52 +205,61 @@
 
 -(void)stopRFRecording:(NSString *)siteId withRequestBody:(NSDictionary *)requestBody andRecordingId:(NSString *)recodringId;
 
-//#pragma mark - Error logging
-//- (void) reportLogMessage: (NSString *) errorMessage;
-
-#pragma mark - Background
-
--(void)setMonitoringInBackground:(NSArray *)regions __deprecated;
--(void)setRangingInBackground:(NSArray *)regions __deprecated;
-
 /**
  * Setting that enables or disables SDK usage when app is woken using iBeacon regions
  */
 
-#pragma mark - Wake up app
-- (void) wakeUpAppSetting: (BOOL) shouldWakeUpApp;
-
 /**
  * Setting that enables or disables SDK to work in background mode
- *
  */
-
 #pragma mark - Background app settings
-- (void) backgroundAppSetting: (BOOL) shouldWorkInBackground;
-- (void) setAppState: (UIApplicationState) appState;
+
+- (void)wakeUpAppSetting:(BOOL)shouldWakeUpApp;
+
+- (void)setMonitoringInBackground:(NSArray *)regions __deprecated;
+
+- (void)setRangingInBackground:(NSArray *)regions __deprecated;
+
+- (void)backgroundAppSetting:(BOOL)shouldWorkInBackground __deprecated;
+
+- (void)setAppState: (UIApplicationState) appState;
+
 + (UIApplicationState) getAppState;
-#pragma mark - Wake up / Background app times
+
+// App wakeup
+
 - (void) setSentTimeInBackgroundInMins: (double) sendTimeInBackgroundInMins
             restTimeInBackgroundInMins: (double) restTimeInBackgroundInMins;
+
 - (void) sendWithoutRest;
-#pragma mark - RANGING METHODS
-//Starts the delivery of notifications for beacons in the specified region
-- (void) startRangingBeaconsInRegion: (MSTBeaconRegion *) beaconRegion;
 
-//Stops the delivery of notifications for the specified beacon region
-- (void) stopRangingBeaconsInRegion: (MSTBeaconRegion *) beaconRegion;
-
+#pragma mark - Ranging Virtual Beacons. Enable shouldRangeVirtualBeacon to receive virtual beacon ranging
 
 /**
- * Setting that enables or disables SDK remote logging and also sets the logging level
+ *  Check if Location is authorized.
  *
+ *  @return Returns true or false for Location authorization.
  */
+// Starts the delivery of notifications for beacons in the specified region
+- (void)startRangingBeaconsInRegion:(MSTBeaconRegion *)beaconRegion;
 
-- (void) setLogLevel: (MSTRemoteLoggingLogLevel) mistRemoteLoggingLogLevel;
+/**
+ *  Check if Location is authorized.
+ *
+ *  @return Returns true or false for Location authorization.
+ */
+// Stops the delivery of notifications for the specified beacon region
+- (void)stopRangingBeaconsInRegion:(MSTBeaconRegion *)beaconRegion;
+
+/**
+ * Optionally set log level
+ */
+- (void)setLogLevel:(MSTLoggerLogLevel)level;
 
 #pragma mark -
 
 //UNIMPLEMENTED
+
 //Clients
 - (NSArray *) getAllClients;
 //Zones
@@ -280,27 +273,21 @@
 -(void)alert:(NSDictionary *)msgDict;
 
 #pragma mark - App modified locations
+
 - (void) sendAppModifiedLocation: (CLLocationCoordinate2D) location;
+
 - (void) sendAppModifiedLocationX:(double) x y:(double) y;
 
 #pragma mark - Convert x,y to lat, long
+
 - (CLLocationCoordinate2D) getLatitudeLongitudeUsingMapOriginForX: (double) x AndY: (double) y;
 
-#pragma mark - App debugging
-- (void) sendAppLogs: (NSDictionary *) appLog;
-
 #pragma mark - Lab for Testing
+
 - (void) startTestsForDurationInMins: (long) mins;
 
-#pragma mark - Send Keep Alives
-- (void) setIfShouldSendKeepAlive: (BOOL) shouldSendKeepAlive;
-- (BOOL) getIfShouldSendKeepAlive;
-
-#pragma mark - Send Alerts
-- (void) setIfShouldSendAlerts: (BOOL) shouldSendAlerts;
-- (BOOL) getIfShouldSendAlerts;
-
 #pragma mark - Compass / Dead reckoning settings
+
 - (void) setCompassOffset: (int) compassOffset;
 - (void) setUseOffset: (bool) useOffset;
 - (void) setdDead: (bool) dDead;

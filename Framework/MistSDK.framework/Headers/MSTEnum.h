@@ -196,4 +196,15 @@ typedef NS_ENUM(NSUInteger, MSTRemoteLoggingLogLevel) {
     OFF
 };
 
+typedef NS_ENUM(NSUInteger, MSTLoggerLogLevel) {
+    MST_LOG_VERBOSE,
+    MST_LOG_DEBUG,
+    MST_LOG_INFO,
+    MST_LOG_WARN,
+    MST_LOG_ERROR,
+    MST_LOG_FATAL,
+    MST_LOG_OFF,
+    MST_LOG_TRACE,
+};
+
 @end
